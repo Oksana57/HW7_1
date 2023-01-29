@@ -1,5 +1,5 @@
-# import creat_contact1
-# import csv_creater
+import creat_contact1
+import csv_creater
 import import_book
 import model
 
@@ -9,6 +9,8 @@ contact1=import_book.import_book
 
 
 def work_book():
+
+    csv_creater.var_export()
     model.prompt()
     u=model.user_input()
     if u == 1:

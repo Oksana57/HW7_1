@@ -3,23 +3,41 @@ import sys
 
 
 def import_book():
-    alist=[]
-    contact1=[]
+    # alist = []
+    contact1 = []
     with open('data.csv', encoding='UTF-8') as n_file:
         reader_object=csv.reader(n_file, delimiter="*")
         count=0
         n=csv.field_size_limit(sys.maxsize)
         for row in reader_object:
-            if count==0:
-                alist = ' '.join(row).split()
-                  
-            elif 0<count<n:
-               
+            if count == 0:
+                # alist = ' '.join(row).split()
+                count += 1
+                continue
+            elif 0 < count < n:
+
                 contact1.append(row)               
-            count+=1
-            if count==n:
+            count += 1
+            if count == n:
                 break
-        return alist, contact1
+    return contact1
+
+contact1=import_book()
+
+# def book_for_rewrite():
+#     key1 = ['name', 'surname', 'phone', 'info']
+#     book_n = []
+#     contact1 = import_book()
+#     # contact = [c_surname, c_name, c_phone, c_info]
+#     dict1 = {key1[j]: contact1[j] for j in range(len(key1))}
+#
+#     # contact1=' * '.join(contact)
+#     # dict2={}
+#     # dict2={i:dict1}
+#     book_n.append(dict1)
+#
+#     return book
+
 
 def key_of_book(contact1):
     key_of_book=[]
@@ -47,8 +65,8 @@ def dict_book(key_of_book, means_of_book):
         book1.append(dict_book)
     return book1     
 
-alist, contact1=import_book()
-# print(alist, contact1)
+# contact1=import_book()
+print(contact1)
 # print(type(contact1))
 key1=key_of_book(contact1)
 # print(key1)
@@ -59,7 +77,9 @@ book1=dict_book(key1, means1)
 # print(book1)
 
 def viewing_book():
+    alist=['name', 'surname', 'phone', 'info']
     print('|   ', ' | '.join(alist), '  |')
+    contact1=import_book()
     for i in range(len(contact1)):
         for j in range(len(contact1[i])):
             view1='--'.join(contact1[i])
@@ -67,7 +87,7 @@ def viewing_book():
         print('|', view1, '|')
     return
 
-# viewing_book()
+# print(viewing_book())
 
 def find_contact():
     number=input('Введите номер телефона для поиска: ')

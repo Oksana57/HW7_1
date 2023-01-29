@@ -15,7 +15,7 @@ def contact_input():
             c_phone=input('Введите телефон: ')
             c_info=input('Введите описание: ')
             # dict1={}
-            key1=['name', 'surname', 'phone', 'info']
+            key1=['surname', 'name', 'phone', 'info']
 
             contact=[c_surname, c_name, c_phone, c_info]
             dict1 = {key1[j]: contact[j] for j in range(len(key1))} 

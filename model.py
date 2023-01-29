@@ -1,5 +1,6 @@
 import import_book
 import csv
+import creat_contact1
 
 import sys
 
@@ -38,34 +39,58 @@ def find_contact():
    
 
 def add_cont():
-    book=[]
-    while True:
-        for i in range(1, 1000):
-            c_surname = input('Введите фамилию абонента: ')
-            c_name = input('Введите имя абонента: ')
-            c_phone = input('Введите телефон: ')
-            c_info = input('Введите описание: ')
-            contact = [c_surname, c_name, c_phone, c_info]
-            book.append(contact)
-            print('хотите ввести еще? введите "да" или "нет": ')
-            answer = input()
+    book1 = creat_contact1.contact_input()
+    # book=[]
+    # while True:
+    #     for i in range(1, 1000):
+    #         c_surname = input('Введите фамилию абонента: ')
+    #         c_name = input('Введите имя абонента: ')
+    #         c_phone = input('Введите телефон: ')
+    #         c_info = input('Введите описание: ')
+    #         contact = [c_surname, c_name, c_phone, c_info]
+    #         book.append(contact)
+    #         print('хотите ввести еще? введите "да" или "нет": ')
+    #         answer = input()
+    #
+    #         if answer == 'да':
+    #             # dict2[i]=dict1
+    #
+    #             continue
+    #
+    #         elif answer == 'нет':
+    #             break
+    return book1
 
-            if answer == 'да':
-                # dict2[i]=dict1
+def book_for_rewrite():
+    key1 = ['surname', 'name', 'phone', 'info']
+    book_n = []
+    contact1 = import_book.import_book()
+    # contact = [c_surname, c_name, c_phone, c_info]
+    dict1 = {key1[j]: contact1[j] for j in range(len(key1))}
 
-                continue
+    # contact1=' * '.join(contact)
+    # dict2={}
+    # dict2={i:dict1}
+    book_n.append(dict1)
+    # return contact1
+    return book_n
 
-            elif answer == 'нет':
-                break
-        return book
+print(book_for_rewrite())
 
+def rewrite():
+    book1 = book_for_rewrite()
+    book2 = add_cont()
+    book_rewrite = []
+    book_rewrite = book1+book2
 
-# print(add_cont())
+    return book_rewrite
+
+# print(rewrite())
 
 
 def book_new():
-    contact2 = add_cont()
-    key1 = ['name', 'surname', 'phone', 'info']
+    contact2 = rewrite()
+    key1 = ['surname', 'name', 'phone', 'info']
     dict2 = {}
     book = []
     for i in range(len(contact2)):
@@ -76,11 +101,11 @@ def book_new():
 
 def add_file():
     csv_file = 'data.csv'
-    book=book_new()
+    book = book_new()
     dict1 = book
     csv_columns = ['surname', 'name', 'phone', 'info']
     try:
-        with open(csv_file, 'a') as file_c:
+        with open(csv_file, 'w') as file_c:
             writer=csv.DictWriter(file_c, fieldnames=csv_columns, delimiter="*")
             writer.writeheader()
             for data in dict1:
@@ -91,3 +116,6 @@ def add_file():
 
 
 # add_file()
+
+
+
